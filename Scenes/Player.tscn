@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://5gktlldlorps"]
 
-[ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_kyqiw"]
+[ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_52ee3"]
 [ext_resource type="Texture2D" uid="uid://b0gs88h3kgw6w" path="res://Assets/Main Characters/Ninja Frog/Double Jump (32x32).png" id="2_52ee3"]
 [ext_resource type="Texture2D" uid="uid://bggx0yon545ep" path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" id="2_gntrk"]
 [ext_resource type="Texture2D" uid="uid://b1fsai6anbj1n" path="res://Assets/Main Characters/Ninja Frog/Fall (32x32).png" id="2_nn08x"]
@@ -294,17 +294,16 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_arntx"]
-radius = 10.0499
+radius = 7.95
 
 [node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_kyqiw")
+script = ExtResource("1_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")
-animation = &"Wall_Jump"
+animation = &"Run"
 autoplay = "Idle"
-frame_progress = 0.543143
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_arntx")

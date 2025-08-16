@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://5gktlldlorps"]
+[gd_scene load_steps=47 format=3 uid="uid://5gktlldlorps"]
 
 [ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_52ee3"]
 [ext_resource type="Texture2D" uid="uid://b0gs88h3kgw6w" path="res://Assets/Main Characters/Ninja Frog/Double Jump (32x32).png" id="2_52ee3"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://72cy3t4vx6wi" path="res://Assets/Main Characters/Ninja Frog/Jump (32x32).png" id="3_5ixxa"]
 [ext_resource type="Texture2D" uid="uid://d27r7ojgqvskp" path="res://Assets/Main Characters/Ninja Frog/Run (32x32).png" id="3_gntrk"]
 [ext_resource type="Texture2D" uid="uid://ctkvnct8yf524" path="res://Assets/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="5_nn08x"]
+
+[sub_resource type="Curve" id="Curve_52ee3"]
+_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(0.224215, 1), 0.0, 0.0, 0, 0, Vector2(0.919283, 0.719101), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xixlo"]
 atlas = ExtResource("2_52ee3")
@@ -298,11 +302,13 @@ radius = 7.95
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_52ee3")
+dash_curve = SubResource("Curve_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")
-animation = &"Run"
+animation = &"Wall_Jump"
 autoplay = "Idle"
+frame_progress = 0.624948
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

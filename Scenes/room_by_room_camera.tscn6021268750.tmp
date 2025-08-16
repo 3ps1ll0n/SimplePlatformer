@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://carmuvqqet7mu"]
+
+[ext_resource type="Script" uid="uid://js7vkhg6e7t6" path="res://Scripts/room_by_room_camera.gd" id="1_sokj1"]
+
+[node name="RoomByRoomCamera" type="Camera2D"]
+zoom = Vector2(2, 2)
+position_smoothing_speed = 11.69
+script = ExtResource("1_sokj1")
+transition_speed = null

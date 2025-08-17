@@ -306,9 +306,8 @@ dash_curve = SubResource("Curve_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")
-animation = &"Wall_Jump"
+animation = &"Double_Jump"
 autoplay = "Idle"
-frame_progress = 0.624948
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

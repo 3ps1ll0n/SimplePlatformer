@@ -63,7 +63,7 @@ func _physics_process(delta):
 			dash_direction = last_direction
 		dash_direction = dash_direction.normalized()
 		
-	if is_on_floor():
+	if not is_dashing and is_on_floor():
 		able_to_dash = true
 	
 	# Performe actual dash.
@@ -88,20 +88,19 @@ func _physics_process(delta):
 	elif input_direction < Vector2.ZERO:
 		animated_sprite.flip_h = true
 	
-	#if is_dashing = true:
-		#animated_sprite.play("Run")
-	#else:
-	if not is_on_floor():
-		if velocity.y < 0:
-			animated_sprite.play("Jump")
-		elif velocity.y > 0:
-			animated_sprite.play("Fall")
+	if is_dashing == true:
+		animated_sprite.play("Double_Jump")
 	else:
-		if velocity.x != 0:
-			animated_sprite.play("Run")
+		if not is_on_floor():
+			if velocity.y < 0:
+				animated_sprite.play("Jump")
+			elif velocity.y > 0:
+				animated_sprite.play("Fall")
 		else:
-			animated_sprite.play("Idle")
-			
+			if velocity.x != 0:
+				animated_sprite.play("Run")
+			else:
+				animated_sprite.play("Idle")
 	
 
 	move_and_slide()

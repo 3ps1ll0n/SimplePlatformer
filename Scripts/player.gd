@@ -16,11 +16,11 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var able_to_dash = true
 var is_dashing = false
-var dash_start_position = 0
-var dash_direction = 0
+var dash_start_position : Vector2
+var dash_direction : Vector2 = Vector2.ZERO
 
-var last_direction = 1
-
+var last_direction : Vector2 = Vector2.RIGHT
+# For camera
 func _ready():
 	add_to_group("player")
 
@@ -35,38 +35,46 @@ func _physics_process(delta):
 	if not Input.is_action_pressed("Jump") and velocity.y < 0:
 		velocity.y *=decelerate_on_jump_release
 	
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("Move Left", "Move Right")
+	# Get input direction as Vector2
+	var input_direction = Vector2(
+		Input.get_axis("Left","Right"),
+		Input.get_axis("Up","Down")
+	).normalized()
 	
-	if direction != 0 :
-		last_direction = direction
+	if input_direction != Vector2.ZERO :
+		last_direction = input_direction
 	
-	if direction:
-		velocity.x = move_toward(velocity.x, direction * speed, speed * acceleration)
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed * deceleration)
 	
+	# Normal movement (only if not dashing)
+	if not is_dashing:
+		velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
+		#velocity.y = move_toward(velocity.y, input_direction.y * speed if input_direction.y != 0 else velocity.y, speed * acceleration)
+		if input_direction.x == 0:
+			velocity.x = move_toward(velocity.x, 0, speed * deceleration)
+		if input_direction.y == 0:
+			velocity.y = move_toward(velocity.y, 0, speed * deceleration)
+		
 	# Dash activation
 	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:
 		is_dashing = true
 		able_to_dash = false
-		dash_start_position = position.x
-		# use current input direction, otherwise fallback to last direction
-		if direction != 0:
-			dash_direction = direction 
+		dash_start_position = position
+		if input_direction != Vector2.ZERO:
+			dash_direction = input_direction
 		else:
-			dash_direction = last_direction 
+			dash_direction = last_direction
+		dash_direction = dash_direction.normalized()
+		
 	if is_on_floor():
 		able_to_dash = true
 	
 	# Performe actual dash.
 	if is_dashing:
-		var current_distance = abs(position.x - dash_start_position)
+		var current_distance = position.distance_to(dash_start_position)
 		if current_distance >= dash_max_distance or is_on_wall():
 			is_dashing = false
 		else:
-			velocity.x = dash_direction * dash_speed * dash_curve.sample(current_distance/dash_max_distance)
-			velocity.y = 0
+			velocity = dash_direction * dash_speed * dash_curve.sample(current_distance/dash_max_distance)
 	
 	
 	
@@ -77,12 +85,14 @@ func _physics_process(delta):
 	
 	#========================================== Animation Section ==========================================
 	
-	if direction > 0:
-		animated_sprite.flip_h = false
-	elif direction < 0:
-		animated_sprite.flip_h = true
+	#if input_direction > 0:
+	#	animated_sprite.flip_h = false
+	#elif input_direction < 0:
+	#	animated_sprite.flip_h = true
 	
-	
+	#if is_dashing = true:
+		#animated_sprite.play("Run")
+	#else:
 	if not is_on_floor():
 		if velocity.y < 0:
 			animated_sprite.play("Jump")

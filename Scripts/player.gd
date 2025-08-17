@@ -11,7 +11,7 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var dash_speed = 500
-@export var dash_max_distance = 90
+@export var dash_max_distance = 65
 @export var dash_curve : Curve
 
 var able_to_dash = true
@@ -51,8 +51,6 @@ func _physics_process(delta):
 		#velocity.y = move_toward(velocity.y, input_direction.y * speed if input_direction.y != 0 else velocity.y, speed * acceleration)
 		if input_direction.x == 0:
 			velocity.x = move_toward(velocity.x, 0, speed * deceleration)
-		if input_direction.y == 0:
-			velocity.y = move_toward(velocity.y, 0, speed * deceleration)
 		
 	# Dash activation
 	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:
@@ -71,7 +69,7 @@ func _physics_process(delta):
 	# Performe actual dash.
 	if is_dashing:
 		var current_distance = position.distance_to(dash_start_position)
-		if current_distance >= dash_max_distance or is_on_wall():
+		if current_distance >= dash_max_distance or is_on_wall() or is_on_ceiling() or is_on_floor():
 			is_dashing = false
 		else:
 			velocity = dash_direction * dash_speed * dash_curve.sample(current_distance/dash_max_distance)
@@ -85,10 +83,10 @@ func _physics_process(delta):
 	
 	#========================================== Animation Section ==========================================
 	
-	#if input_direction > 0:
-	#	animated_sprite.flip_h = false
-	#elif input_direction < 0:
-	#	animated_sprite.flip_h = true
+	if input_direction > Vector2.ZERO:
+		animated_sprite.flip_h = false
+	elif input_direction < Vector2.ZERO:
+		animated_sprite.flip_h = true
 	
 	#if is_dashing = true:
 		#animated_sprite.play("Run")

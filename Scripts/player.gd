@@ -11,7 +11,6 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var dash_speed = 500
-@export var dash_max_distance = 65
 @export var dash_curve : Curve
 
 var able_to_dash = true
@@ -48,7 +47,6 @@ func _physics_process(delta):
 	# Normal movement (only if not dashing)
 	if not is_dashing:
 		velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
-		#velocity.y = move_toward(velocity.y, input_direction.y * speed if input_direction.y != 0 else velocity.y, speed * acceleration)
 		if input_direction.x == 0:
 			velocity.x = move_toward(velocity.x, 0, speed * deceleration)
 		
@@ -62,17 +60,20 @@ func _physics_process(delta):
 		else:
 			dash_direction = last_direction
 		dash_direction = dash_direction.normalized()
+		$"Dash Timer".start()
 		
 	if not is_dashing and is_on_floor():
 		able_to_dash = true
 	
 	# Performe actual dash.
 	if is_dashing:
+
 		var current_distance = position.distance_to(dash_start_position)
-		if current_distance >= dash_max_distance or is_on_wall() or is_on_ceiling() or is_on_floor():
+		velocity = dash_direction * dash_speed * dash_curve.sample(current_distance)
+		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
-		else:
-			velocity = dash_direction * dash_speed * dash_curve.sample(current_distance/dash_max_distance)
+			
+		
 	
 	
 	

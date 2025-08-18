@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ctkvnct8yf524" path="res://Assets/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="5_nn08x"]
 
 [sub_resource type="Curve" id="Curve_52ee3"]
-_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(0.224215, 1), 0.0, 0.0, 0, 0, Vector2(0.919283, 0.719101), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(0.224215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xixlo"]

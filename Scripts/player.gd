@@ -30,8 +30,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		able_to_jump = false
 		velocity.y += gravity * delta
+
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and able_to_jump and not is_dashing:
+	if Input.is_action_just_pressed("Jump") and able_to_jump:
 		velocity.y = jump_velocity
 		is_dashing = false
 		is_jumping = true
@@ -50,10 +51,20 @@ func _physics_process(delta):
 	
 	
 	# Normal movement (only if not dashing)
-	if not is_dashing:
-		velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
-		if input_direction.x == 0:
-			velocity.x = move_toward(velocity.x, 0, speed * deceleration)
+	if is_on_floor():
+		if not is_dashing:
+			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
+			if input_direction.x == 0:
+				velocity.x = move_toward(velocity.x, 0, speed * deceleration)
+	else:
+		if not is_dashing:
+			if velocity.x < input_direction.x * speed:
+				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)
+				if input_direction.x == 0:
+					velocity.x = move_toward(velocity.x, 0, speed * deceleration * 0.001)
+		
+		
+		
 		
 	# Dash activation
 	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:

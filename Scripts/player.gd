@@ -1,6 +1,7 @@
 extends CharacterBody2D
 #  List des variables
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var grappling: Node2D = $"../Grappling"
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
@@ -51,8 +52,6 @@ func _physics_process(delta):
 		#velocity.y = move_toward(velocity.y, input_direction.y * speed if input_direction.y != 0 else velocity.y, speed * acceleration)
 		if input_direction.x == 0:
 			velocity.x = move_toward(velocity.x, 0, speed * deceleration)
-		if input_direction.y == 0:
-			velocity.y = move_toward(velocity.y, 0, speed * deceleration)
 		
 	# Dash activation
 	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:
@@ -64,6 +63,9 @@ func _physics_process(delta):
 		else:
 			dash_direction = last_direction
 		dash_direction = dash_direction.normalized()
+	if Input.is_action_just_pressed("Grappling_Hook"):
+		var mouse_pos = get_global_mouse_position()
+		grappling.fire(self, mouse_pos)
 		
 	if is_on_floor():
 		able_to_dash = true

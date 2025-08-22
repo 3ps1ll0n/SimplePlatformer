@@ -59,7 +59,7 @@ func _physics_process(delta):
 	else:
 		if not is_dashing:
 			if input_direction.x != velocity.x/abs(velocity.x) and input_direction.x == 0:
-				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * 0.5)
+				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * 0.7)
 			
 			if abs(velocity.x) < abs(input_direction.x) * speed:
 				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)

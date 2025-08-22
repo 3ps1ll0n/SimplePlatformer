@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://5gktlldlorps"]
+[gd_scene load_steps=47 format=3 uid="uid://5gktlldlorps"]
 
 [ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_52ee3"]
 [ext_resource type="Texture2D" uid="uid://b0gs88h3kgw6w" path="res://Assets/Main Characters/Ninja Frog/Double Jump (32x32).png" id="2_52ee3"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ctkvnct8yf524" path="res://Assets/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="5_nn08x"]
 
 [sub_resource type="Curve" id="Curve_52ee3"]
-_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(0.224215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.315), 0.0, 0.0, 0, 0, Vector2(0.224, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.798), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xixlo"]
@@ -302,6 +302,7 @@ radius = 7.95
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_52ee3")
+dash_curve = SubResource("Curve_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")

@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
 [ext_resource type="Texture2D" uid="uid://cocfe272444wq" path="res://Assets/Terrain/Terrain (16x16).png" id="2_j5yw3"]
-[ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="3_7lihs"]
 [ext_resource type="Texture2D" uid="uid://cb3sq3xdjmvqg" path="res://Assets/Background/Blue.png" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://bs4lgd8kkeglv" path="res://Scenes/Room.tscn" id="5_7lihs"]
+[ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kldst"]
 texture = ExtResource("2_j5yw3")
@@ -329,7 +329,8 @@ texture = ExtResource("3_j5yw3")
 3:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_b2bpf"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_kldst")
 sources/1 = SubResource("TileSetAtlasSource_b2bpf")
 
@@ -389,5 +390,7 @@ visible = false
 visible = false
 position = Vector2(1558.5, -121.5)
 shape = SubResource("RectangleShape2D_fgofq")
+
+[node name="Grappling_Hook" parent="." instance=ExtResource("6_7lihs")]
 
 [connection signal="timeout" from="Player/Dash Timer" to="Player" method="_on_dash_timer_timeout"]

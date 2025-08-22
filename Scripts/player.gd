@@ -1,7 +1,7 @@
 extends CharacterBody2D
 #  List des variables
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var grappling: Node2D = $"../Grappling"
+@onready var grappling_hook: Node2D = $"../Grappling_Hook"
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
@@ -91,7 +91,8 @@ func _physics_process(delta):
 		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
 			
-		
+	if Input.is_action_just_pressed("Grappling_Hook"):
+		grappling_hook.fire(self, get_global_mouse_position())
 	
 	
 	

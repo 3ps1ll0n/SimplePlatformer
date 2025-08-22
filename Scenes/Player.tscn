@@ -8,6 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://d27r7ojgqvskp" path="res://Assets/Main Characters/Ninja Frog/Run (32x32).png" id="3_gntrk"]
 [ext_resource type="Texture2D" uid="uid://ctkvnct8yf524" path="res://Assets/Main Characters/Ninja Frog/Wall Jump (32x32).png" id="5_nn08x"]
 
+[sub_resource type="Curve" id="Curve_52ee3"]
+_data = [Vector2(0, 0.314607), 0.0, 0.0, 0, 0, Vector2(0.224215, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.797753), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xixlo"]
 atlas = ExtResource("2_52ee3")
 region = Rect2(0, 0, 32, 32)
@@ -301,9 +305,8 @@ script = ExtResource("1_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")
-animation = &"Wall_Jump"
+animation = &"Double_Jump"
 autoplay = "Idle"
-frame_progress = 0.624948
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)

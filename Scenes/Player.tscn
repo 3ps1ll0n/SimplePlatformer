@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://5gktlldlorps"]
+[gd_scene load_steps=46 format=3 uid="uid://5gktlldlorps"]
 
 [ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_52ee3"]
 [ext_resource type="Texture2D" uid="uid://b0gs88h3kgw6w" path="res://Assets/Main Characters/Ninja Frog/Double Jump (32x32).png" id="2_52ee3"]
@@ -302,7 +302,6 @@ radius = 7.95
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_52ee3")
-dash_curve = SubResource("Curve_52ee3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1e7my")

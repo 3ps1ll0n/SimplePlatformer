@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://byswk1uorrwvw"]
+[gd_scene load_steps=13 format=3 uid="uid://byswk1uorrwvw"]
 
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
 [ext_resource type="Texture2D" uid="uid://cocfe272444wq" path="res://Assets/Terrain/Terrain (16x16).png" id="2_j5yw3"]
+[ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="3_7lihs"]
 [ext_resource type="Texture2D" uid="uid://cb3sq3xdjmvqg" path="res://Assets/Background/Blue.png" id="3_j5yw3"]
 [ext_resource type="PackedScene" uid="uid://bs4lgd8kkeglv" path="res://Scenes/Room.tscn" id="5_7lihs"]
 

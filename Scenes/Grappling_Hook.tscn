@@ -21,7 +21,9 @@ scale = Vector2(0.385559, 0.360042)
 texture = SubResource("GradientTexture2D_ui3mc")
 
 [node name="Line2D" type="Line2D" parent="."]
+z_index = 1
 points = PackedVector2Array(0, 0)
 width = 2.0
+default_color = Color(0.955778, 0.538553, 0.792365, 1)
 
 [node name="Timer" type="Timer" parent="."]

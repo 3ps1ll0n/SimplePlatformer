@@ -91,9 +91,10 @@ func _physics_process(delta):
 		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
 			
-	if Input.is_action_just_pressed("Grappling_Hook"):
+	if Input.is_action_just_pressed("Grapple"):
 		grappling_hook.fire(self, get_global_mouse_position())
-	
+	elif Input.is_action_just_released("Grapple"):
+		grappling_hook.reset()
 	
 	
 	

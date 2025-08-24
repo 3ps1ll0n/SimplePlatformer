@@ -11,7 +11,6 @@
 [sub_resource type="Curve" id="Curve_52ee3"]
 _data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.2, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.8), 0.0, 0.0, 0, 0]
 point_count = 3
-metadata/_snap_enabled = true
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xixlo"]
 atlas = ExtResource("2_52ee3")

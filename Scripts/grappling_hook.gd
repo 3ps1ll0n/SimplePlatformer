@@ -1,10 +1,12 @@
 extends Node2D
 
-@export var speed := 600.0
+@export var speed := 800.0
+@export var pull_speed := 1000
+
 var direction := Vector2.ZERO
 var is_traveling := false
 var is_hooked := false
-var max_distance := 100.0
+var max_distance := 300.0
 var current_distance := 0.0
 var target_distance := 0.0
 var start_position := Vector2.ZERO
@@ -56,12 +58,16 @@ func _process(delta: float) -> void:
 		reset()
 		pass
 	elif player:
-		var distance_to_grapple = player.global_position.distance_to(current_position) #current position is the final position in this case
+		var to_grapple = current_position - player.global_position
+		var distance = to_grapple.length()
 		
-		if distance_to_grapple > max_distance:
-			var pull_direction = (current_position - player.global_position).normalized()
-			var pull_strength = (distance_to_grapple - max_distance) * 100.0  # Tune this multiplier
-			player.velocity += pull_direction * pull_strength * delta
+		if distance > 20.0: # tolérance pour ne pas osciller
+			var pull_direction = to_grapple.normalized()
+			player.velocity = pull_direction * pull_speed
+			
+		else:
+			# Arrivé au grappin
+			reset()
 		
 		follow_player()
 		
@@ -85,7 +91,7 @@ func reset():
 	direction = Vector2.ZERO
 	is_traveling = false
 	is_hooked = false
-	max_distance = 100.0
+	max_distance = 300.0
 	current_distance = 0.0
 	target_distance = 0.0
 	start_position = Vector2.ZERO

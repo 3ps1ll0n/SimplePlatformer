@@ -40,11 +40,11 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and able_to_jump:
+	if Input.is_action_just_pressed("Jump") and able_to_jump and not is_dashing and not grappling_hook.get_is_hooked():
 		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
-	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing:
+	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing and not grappling_hook.get_is_hooked():
 		velocity.y *=decelerate_on_jump_release
 	
 	

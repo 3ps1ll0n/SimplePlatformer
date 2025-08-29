@@ -100,3 +100,5 @@ func reset():
 	line.clear_points()
 	visible = false
 	
+func get_is_hooked() -> bool:
+	return is_hooked

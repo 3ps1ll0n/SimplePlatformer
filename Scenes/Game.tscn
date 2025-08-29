@@ -449,14 +449,6 @@ layer_1/tile_data = PackedInt32Array(131071, 458752, 0, 65536, 458752, 0, 65537,
 [node name="Player" parent="." instance=ExtResource("1_gl6un")]
 z_index = 5
 position = Vector2(36, 5)
-speed = 200.0
-acceleration = 0.1
-momentum = 0.1
-jump_velocity = -400.0
-decelerate_on_jump_release = 0.5
-dash_speed = 500
-attack_cooldown = 0.3
-attack_duration = 0.15
 
 [node name="RoomByRoomCamera" parent="Player" instance=ExtResource("2_b2bpf")]
 

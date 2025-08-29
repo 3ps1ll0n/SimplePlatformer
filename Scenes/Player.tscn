@@ -313,3 +313,6 @@ autoplay = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
 shape = SubResource("CircleShape2D_arntx")
+
+[node name="AttackPoint" type="Node2D" parent="."]
+position = Vector2(12, 0)

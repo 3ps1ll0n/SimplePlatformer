@@ -14,13 +14,20 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var dash_speed = 500
 @export var dash_curve : Curve
 
+
+@export var attack_cooldown := 0.3   # temps entre deux attaques
+@export var attack_duration := 0.15  # durée pendant laquelle la hitbox est active
+@onready var attack_point = $AttackPoint
+
 var able_to_jump = true
 var able_to_dash = true
 var is_dashing = false
 var is_jumping = false
+var can_attack := true
 var dash_start_position : Vector2
 var dash_direction : Vector2 = Vector2.ZERO
 var last_direction : Vector2 = Vector2.RIGHT
+var attack_direction := Vector2.RIGHT 
 
 # For camera
 func _ready():
@@ -92,7 +99,8 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("Grapple"):
 		grappling_hook.reset()
 	
-	
+	if Input.is_action_just_pressed("Attack") and can_attack:
+		perform_attack()
 	
 	
 	
@@ -121,3 +129,42 @@ func _physics_process(delta):
 	
 
 	move_and_slide()
+	
+func perform_attack() -> void:
+	can_attack = false
+	var dir := get_attack_direction()
+	# Place le AttackPoint selon la direction
+	var offset = 32.0 # distance devant le joueur
+	attack_point.position = dir * offset
+	#attack_point.rotation = dir.angle()
+	
+	# Instancie la hitbox
+	var hitbox = preload("res://Scenes/Attack_Hit_Box.tscn").instantiate()
+	attack_point.add_child(hitbox)
+	
+	# Donne la même rotation à la hitbox (utile si rectangulaire)
+	hitbox.rotation = dir.angle()
+	
+	hitbox.set_shape(RectangleShape2D.new(), Vector2(40, 10))
+	
+	# Supprime après la durée
+	await get_tree().create_timer(attack_duration).timeout
+	hitbox.queue_free()
+	
+	# Cooldown avant prochaine attaque
+	await get_tree().create_timer(attack_cooldown).timeout
+	can_attack = true
+	
+func get_attack_direction() -> Vector2:
+	var dir = Vector2.ZERO
+	if Input.is_action_pressed("Up"):
+		dir = Vector2.UP
+	elif Input.is_action_pressed("Down"):
+		dir = Vector2.DOWN
+	elif Input.is_action_pressed("Left"):
+		dir = Vector2.LEFT
+	elif Input.is_action_pressed("Right" ):
+		dir = Vector2.RIGHT
+	else:
+		dir = last_direction # défaut = attaque horizontale droite
+	return dir

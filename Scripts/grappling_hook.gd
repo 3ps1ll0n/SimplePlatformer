@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var speed := 800.0
-@export var pull_speed := 1000
+@export var launch_speed := 800.0
+@export var pull_speed := 500
 
 var direction := Vector2.ZERO
 var is_traveling := false
@@ -37,7 +37,7 @@ func fire(p: CharacterBody2D, to_position: Vector2) -> void:
 
 func _process(delta: float) -> void:
 	if is_traveling:
-		current_distance += speed * delta
+		current_distance += launch_speed * delta
 		# Enable RayCast2D to check hit 
 		ray.target_position = current_position - start_position
 		ray.position = start_position

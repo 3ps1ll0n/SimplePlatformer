@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
-@export_range(0,1) var deceleration = 0.1
+@export_range(0,1) var momentum = 0.1
 
 @export var jump_velocity = -400.0
 @export_range(0,1) var decelerate_on_jump_release = 0.5
@@ -34,7 +34,7 @@ func _physics_process(delta):
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and able_to_jump:
-		velocity.y = jump_velocity
+		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
 	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing:
@@ -53,19 +53,15 @@ func _physics_process(delta):
 	
 	# Normal movement (only if not dashing)
 
-	if is_on_floor():
-		if not is_dashing:
-			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
-			if input_direction.x == 0:
-				velocity.x = move_toward(velocity.x, 0, speed * deceleration)
-	else:
-		if not is_dashing:
-			if input_direction.x != velocity.x/abs(velocity.x) and input_direction.x == 0:
-				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * 0.7)
-			
-			if abs(velocity.x) < abs(input_direction.x) * speed:
-				velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)
+	if is_on_floor() and not is_dashing:
+		velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
+	else: 
+		if input_direction.x != velocity.x/abs(velocity.x):
+			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * momentum)
 		
+		if abs(velocity.x) < abs(input_direction.x) * speed:
+			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)
+	
 	# Dash activation
 	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:
 		is_dashing = true

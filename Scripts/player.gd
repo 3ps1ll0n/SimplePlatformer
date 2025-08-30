@@ -30,6 +30,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		able_to_jump = false
 		velocity.y += gravity * delta
+<<<<<<< Updated upstream
 
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump") and able_to_jump:
@@ -38,6 +39,32 @@ func _physics_process(delta):
 		is_jumping = true
 	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing:
 		velocity.y *=decelerate_on_jump_release
+=======
+		$CoyoteTimeTimer.start()
+		
+	if not is_dashing and is_on_floor():
+		able_to_dash = true
+		able_to_jump = true
+	
+	var can_coyote = $"CoyoteTimeTimer".time_left > 0
+	var has_buffer = $"JumpBufferTimer".time_left > 0
+	
+	# Handle jump.
+	if Input.is_action_just_pressed("Jump"):
+		$JumpBufferTimer.start()
+	
+	if not is_dashing and not grappling_hook.get_is_hooked():
+		if (is_on_floor() or can_coyote) and has_buffer:
+			velocity.y = jump_velocity
+			is_jumping = true
+			able_to_jump = false
+			$"JumpBufferTimer".stop()  # consume the buffer
+			$"CoyoteTimeTimer".stop()  # consume coyote
+			
+	if not Input.is_action_pressed("Jump") and velocity.y < 0 and is_jumping and (is_on_floor() or can_coyote):
+		velocity.y *= decelerate_on_jump_release
+		is_jumping = false
+>>>>>>> Stashed changes
 	
 	
 	# Get input direction as Vector2
@@ -80,9 +107,7 @@ func _physics_process(delta):
 		dash_direction = dash_direction.normalized()
 		$"Dash Timer".start()
 		
-	if not is_dashing and is_on_floor():
-		able_to_dash = true
-		able_to_jump = true
+	
 	# Performe actual dash.
 	if is_dashing:
 

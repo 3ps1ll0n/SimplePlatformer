@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://oqt0gdq8igxd"]
+
+[ext_resource type="Script" uid="uid://djd51bfevdl8" path="res://Scripts/grappling_hook.gd" id="1_1w8lt"]
+
+[sub_resource type="Gradient" id="Gradient_apksl"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ui3mc"]
+gradient = SubResource("Gradient_apksl")
+
+[node name="Grappling_Hook" type="Node2D"]
+script = ExtResource("1_1w8lt")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(4.76837e-07, -4.76837e-07)
+scale = Vector2(0.385559, 0.360042)
+texture = SubResource("GradientTexture2D_ui3mc")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+points = PackedVector2Array(0, 0)
+width = 2.0
+default_color = Color(0.955778, 0.538553, 0.792365, 1)
+
+[node name="Timer" type="Timer" parent="."]

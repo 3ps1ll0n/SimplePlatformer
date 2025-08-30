@@ -457,6 +457,11 @@ process_callback = 0
 wait_time = 0.17
 one_shot = true
 
+[node name="JumpBufferTimer" type="Timer" parent="Player"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
 [node name="Grappling_Hook" parent="." instance=ExtResource("6_7lihs")]
 
 [node name="Room" type="Node" parent="."]
@@ -484,5 +489,3 @@ visible = false
 visible = false
 position = Vector2(1558.5, -121.5)
 shape = SubResource("RectangleShape2D_fgofq")
-
-[connection signal="timeout" from="Player/Dash Timer" to="Player" method="_on_dash_timer_timeout"]

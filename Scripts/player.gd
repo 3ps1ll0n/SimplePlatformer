@@ -35,16 +35,19 @@ func _ready():
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and not grappling_hook.get_is_hooked():
 		able_to_jump = false
 		velocity.y += gravity * delta
-
+	
 	# Handle jump.
-	if Input.is_action_just_pressed("Jump") and able_to_jump and not is_dashing and not grappling_hook.get_is_hooked():
+	if Input.is_action_just_pressed("Jump"):
+		$JumpBufferTimer.start()
+		
+	if able_to_jump and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
-	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing and not grappling_hook.get_is_hooked():
+	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y *=decelerate_on_jump_release
 	
 	
@@ -168,3 +171,7 @@ func get_attack_direction() -> Vector2:
 	else:
 		dir = last_direction # défaut = attaque horizontale droite
 	return dir
+
+
+func _on_jump_buffer_timer_timeout() -> void:
+	pass # Replace with function body.

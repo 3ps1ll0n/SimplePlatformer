@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bebb3viiekblk"]
 
-[ext_resource type="Script" uid="uid://c2f73vvy0uok5" path="res://Scripts/grappling_hook.gd" id="1_1w8lt"]
+[ext_resource type="Script" uid="uid://djd51bfevdl8" path="res://Scripts/grappling_hook.gd" id="1_1w8lt"]
 
 [sub_resource type="Gradient" id="Gradient_apksl"]
 

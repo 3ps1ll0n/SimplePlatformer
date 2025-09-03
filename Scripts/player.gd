@@ -36,18 +36,19 @@ func _ready():
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
+		$coyote_timer.start()
 		able_to_jump = false
 		velocity.y += gravity * delta
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):
-		$JumpBufferTimer.start()
+		$jump_buffer_timer.start()
 		
-	if able_to_jump and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
+	if able_to_jump and not is_dashing and $"jump_buffer_timer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
-	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
+	if not Input.is_action_pressed("Jump") and velocity.y < 0 and not is_dashing and $"jump_buffer_timer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y *=decelerate_on_jump_release
 	
 	
@@ -84,7 +85,7 @@ func _physics_process(delta):
 			dash_direction = last_direction
 		dash_direction = dash_direction.normalized()
 
-		$"Dash Timer".start()
+		$"dash_timer".start()
 		
 	if not is_dashing and is_on_floor():
 		able_to_dash = true
@@ -94,7 +95,7 @@ func _physics_process(delta):
 
 		var current_distance = position.distance_to(dash_start_position)
 		velocity = dash_direction * dash_speed * dash_curve.sample(current_distance)
-		if $"Dash Timer".time_left <= 0 :
+		if $"dash_timer".time_left <= 0 :
 			is_dashing = false
 			
 	if Input.is_action_just_pressed("Grapple"):

@@ -1,5 +1,9 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 [gd_scene load_steps=12 format=3 uid="uid://byswk1uorrwvw"]
+=======
+[gd_scene load_steps=19 format=3 uid="uid://byswk1uorrwvw"]
+>>>>>>> Stashed changes
 =======
 [gd_scene load_steps=19 format=3 uid="uid://byswk1uorrwvw"]
 >>>>>>> Stashed changes
@@ -15,6 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://dd7w8tqpkwbk2" path="res://Assets/Parallax/Garden's Forest/pushes.png" id="6_3so38"]
 [ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://rmit5bhksyeb" path="res://Assets/Parallax/Garden's Forest/background1.png" id="7_fgofq"]
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kldst"]
@@ -355,7 +362,10 @@ size = Vector2(463, 311)
 [node name="Game" type="Node2D"]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 [node name="Parallax" type="Node" parent="."]
 
 [node name="Layer4" type="Parallax2D" parent="Parallax"]
@@ -454,6 +464,8 @@ layer_1/tile_data = PackedInt32Array(131071, 458752, 0, 65536, 458752, 0, 65537,
 =======
 [node name="CoyoteTimeTimer" type="Timer" parent="Player"]
 wait_time = 0.5
+
+[node name="CoyoteTimeTimer" type="Timer" parent="Player"]
 
 [node name="Grappling_Hook" parent="." instance=ExtResource("6_7lihs")]
 >>>>>>> Stashed changes

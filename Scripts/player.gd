@@ -19,7 +19,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var attack_duration := 0.15  # durée pendant laquelle la hitbox est active
 @onready var attack_point = $AttackPoint
 
-var able_to_jump = true
 var able_to_dash = true
 var is_dashing = false
 var is_jumping = false
@@ -36,15 +35,13 @@ func _ready():
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
-		$coyote_timer.start()
-		able_to_jump = false
 		velocity.y += gravity * delta
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):
 		$jump_buffer_timer.start()
 		
-	if able_to_jump and not is_dashing and $"jump_buffer_timer".time_left > 0 and not grappling_hook.get_is_hooked():
+	if $"coyote_timer".time_left > 0 and not is_dashing and $"jump_buffer_timer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
@@ -65,6 +62,7 @@ func _physics_process(delta):
 	# Normal movement (only if not dashing)
 
 	if is_on_floor() and not is_dashing:
+		$coyote_timer.start()
 		velocity.x = move_toward(velocity.x, input_direction.x * speed, speed * acceleration)
 	else: 
 		if input_direction.x != velocity.x/abs(velocity.x):
@@ -89,7 +87,6 @@ func _physics_process(delta):
 		
 	if not is_dashing and is_on_floor():
 		able_to_dash = true
-		able_to_jump = true
 	# Performe actual dash.
 	if is_dashing:
 

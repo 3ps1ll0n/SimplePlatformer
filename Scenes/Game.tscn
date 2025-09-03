@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://byswk1uorrwvw"]
+[gd_scene load_steps=20 format=3 uid="uid://byswk1uorrwvw"]
 
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
@@ -13,15 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
 [ext_resource type="Texture2D" uid="uid://rmit5bhksyeb" path="res://Assets/Parallax/Garden's Forest/background1.png" id="7_fgofq"]
 [ext_resource type="PackedScene" path="res://Scenes/Mushroom.tscn" id="13_3cx6b"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_71axn"]
-size = Vector2(20, 10)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71axn"]
-transparency = 2
-alpha_scissor_threshold = 1.0
-alpha_antialiasing_mode = 0
-albedo_texture = ExtResource("7_fgofq")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kldst"]
 texture = ExtResource("2_j5yw3")
@@ -361,20 +352,6 @@ size = Vector2(463, 311)
 
 [node name="Game" type="Node2D"]
 
-[node name="Parallax3D" type="Node3D" parent="."]
-visible = false
-
-[node name="Camera3D" type="Camera3D" parent="Parallax3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.54)
-visible = false
-projection = 1
-size = 7.25
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Parallax3D"]
-visible = false
-mesh = SubResource("QuadMesh_71axn")
-surface_material_override/0 = SubResource("StandardMaterial3D_71axn")
-
 [node name="Parallax" type="Node" parent="."]
 
 [node name="Layer4" type="Parallax2D" parent="Parallax"]
@@ -455,6 +432,8 @@ position = Vector2(36, 5)
 [node name="RoomByRoomCamera" parent="Player" instance=ExtResource("2_b2bpf")]
 
 [node name="coyote_timer" type="Timer" parent="Player"]
+wait_time = 0.1
+one_shot = true
 
 [node name="dash_timer" type="Timer" parent="Player"]
 process_callback = 0

@@ -16,6 +16,7 @@ enum AI_State{
 	HUNTING,
 	ATTACKING,
 	STUNNED,
+	DEAD
 }
 
 var direction := 0
@@ -26,13 +27,24 @@ func _ready() -> void:
 	super._ready()
 
 func _physics_process(delta: float) -> void:
+	if state == AI_State.DEAD:
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	if dead:
+		state = AI_State.DEAD
+		animated_sprite.play("Death")
+		return
 	
 	var distance_from_player := position.distance_to(player.position)
 	
 	if state == AI_State.ATTACKING:
+		super._physics_process(delta)
+		move_and_slide()
+	
 		return
 	
 	if distance_from_player < attack_distance:
@@ -48,6 +60,8 @@ func _physics_process(delta: float) -> void:
 	elif state == AI_State.ATTACKING:
 		hunt()
 		attack()
+		
+	super._physics_process(delta)
 	
 	#========================================== Animation Section ==========================================
 	

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends "res://Scripts/enemy_class.gd"
 
 const JUMP_VELOCITY = -400.0
 var state : AI_State = AI_State.IDLE
@@ -19,6 +19,11 @@ enum AI_State{
 }
 
 var direction := 0
+
+func _ready() -> void:
+	max_health = 50
+	current_health = max_health
+	super._ready()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

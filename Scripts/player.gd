@@ -147,6 +147,7 @@ func perform_attack() -> void:
 	
 	# Donne la même rotation à la hitbox (utile si rectangulaire)
 	hitbox.rotation = dir.angle()
+	hitbox.set_collision_mask_value(2, true)
 	
 	hitbox.set_shape(RectangleShape2D.new(), Vector2(40, 10))
 	

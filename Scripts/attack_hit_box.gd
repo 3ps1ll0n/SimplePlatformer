@@ -6,7 +6,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):   # Assure-toi que tes ennemis sont dans ce groupe
-		#body.take_damage(1)           # Appelle une fonction de dégâts
+		body.take_damage(100)           # Appelle une fonction de dégâts
 		pass
 
 

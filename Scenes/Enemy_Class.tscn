@@ -14,6 +14,12 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lwl18"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_fnywy"]
 length = 0.001
@@ -58,6 +64,7 @@ script = ExtResource("1_xhgx3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_lwl18")
 sprite_frames = SubResource("SpriteFrames_lwl18")
+animation = &"Idle"
 
 [node name="FlashAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
 libraries = {

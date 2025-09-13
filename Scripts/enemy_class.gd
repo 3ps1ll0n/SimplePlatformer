@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var flash_animation: AnimationPlayer = $AnimatedSprite2D/FlashAnimation
+
 @export var max_health := 100
 @export var knockback_strength: float = 200.0
 
@@ -13,6 +15,7 @@ func _ready() -> void:
 
 func take_damage(damage: int) -> void:
 	current_health -= damage
+	flash_animation.play("flash")
 	if current_health <= 0:
 		die()
 
@@ -24,6 +27,8 @@ func take_knockback(from_position : Vector2):
 
 func die() -> void:
 	dead = true
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
 	#queue_free()
 
 func _physics_process(delta: float) -> void:

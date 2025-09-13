@@ -6,9 +6,10 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):   # Assure-toi que tes ennemis sont dans ce groupe
-		body.take_damage(25)  
-		var player: CharacterBody2D = get_parent().get_parent()         # Appelle une fonction de dégâts
-		body.take_knockback(player.position)
+		body.take_damage(5)  
+		var player := get_parent().get_parent()         # Appelle une fonction de dégâts
+		if player is CharacterBody2D:
+			body.take_knockback(player.position)
 		pass
 
 

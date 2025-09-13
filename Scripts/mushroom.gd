@@ -22,7 +22,7 @@ enum AI_State{
 var direction := 0
 
 func _ready() -> void:
-	max_health = 50
+	max_health = 15
 	current_health = max_health
 	super._ready()
 
@@ -88,6 +88,7 @@ func hunt():
 		direction = 1
 
 func attack():
+	velocity = Vector2.ZERO
 	var offset = 20.0
 	var attack_point := Vector2.ZERO
 	attack_point.x = direction * offset
@@ -110,6 +111,5 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "Attack":
 		state = AI_State.IDLE
 	elif animated_sprite.animation == "Attack_Stunned":
-		
 		state = AI_State.IDLE
 		attack_count = 0

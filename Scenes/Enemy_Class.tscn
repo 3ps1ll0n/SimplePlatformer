@@ -1,6 +1,65 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkswiui7o2hcj"]
+[gd_scene load_steps=9 format=3 uid="uid://dkswiui7o2hcj"]
 
+[ext_resource type="Shader" uid="uid://b82r6lw4iy75g" path="res://Shader/hit.gdshader" id="1_7fwit"]
 [ext_resource type="Script" uid="uid://l1nlewejgomk" path="res://Scripts/enemy_class.gd" id="1_xhgx3"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fnywy"]
+shader = ExtResource("1_7fwit")
+shader_parameter/flash_color = Color(0, 0, 0, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwl18"]
+shader = ExtResource("1_7fwit")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwl18"]
+
+[sub_resource type="Animation" id="Animation_fnywy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_7fwit"]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amdjc"]
+_data = {
+&"RESET": SubResource("Animation_fnywy"),
+&"flash": SubResource("Animation_7fwit")
+}
+
 [node name="EnemyClass" type="CharacterBody2D"]
+material = SubResource("ShaderMaterial_fnywy")
 script = ExtResource("1_xhgx3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_lwl18")
+sprite_frames = SubResource("SpriteFrames_lwl18")
+
+[node name="FlashAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_amdjc")
+}

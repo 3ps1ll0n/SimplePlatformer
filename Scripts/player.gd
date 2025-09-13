@@ -15,8 +15,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var dash_curve : Curve
 
 
-@export var attack_cooldown := 0.3   # temps entre deux attaques
-@export var attack_duration := 0.15  # durée pendant laquelle la hitbox est active
+@export var attack_cooldown := 0.30   # temps entre deux attaques
+@export var attack_duration := 0.10  # durée pendant laquelle la hitbox est active
 @onready var attack_point = $AttackPoint
 
 var able_to_jump = true

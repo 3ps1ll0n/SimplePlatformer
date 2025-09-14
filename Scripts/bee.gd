@@ -1,13 +1,15 @@
 extends "res://Scripts/enemy_class.gd"
 
-const SPEED = 150.0
+const SPEED = 100.0
 
 @export var search_range = 80
-@export var detection_range = 150 
+@export var detection_range = 100 
+@export var attack_range = 30
 @export var max_waiting_time := Vector2(0.5, 2)
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wait_idle_time: Timer = $WaitIdleTime
+@onready var player: CharacterBody2D = %Player
 
 var wandering_point := Vector2.ZERO #Point the bee will randomly move arround
 var search_point := Vector2.ZERO #Random point the bee will go to
@@ -30,8 +32,16 @@ func _ready() -> void:
 	
 	set_random_wait_time()
 	
-
 func _physics_process(delta: float) -> void:
+	
+	var distance_from_player = position.distance_to(player.position)
+	
+	if distance_from_player < attack_range:
+		AI_State.ATTACKING
+	if state != AI_State.HUNTING && distance_from_player < detection_range:
+		state = AI_State.HUNTING
+	
+		
 	
 	if state == AI_State.IDLE:
 		return
@@ -43,8 +53,19 @@ func _physics_process(delta: float) -> void:
 			set_random_wait_time()
 			state = AI_State.IDLE
 		pass
-	
+	elif state == AI_State.HUNTING:
+		var dir := player.position - position
+		velocity = dir.normalized() * SPEED
+		if distance_from_player > detection_range:
+			state = AI_State.IDLE
+			wandering_point = position
+			
 	#========================================== Animation Section ==========================================
+	
+	if velocity.x < 0:
+		animated_sprite.flip_h = true
+	elif velocity.x > 0:
+		animated_sprite.flip_h = false
 	
 	if state == AI_State.IDLE:
 		animated_sprite.play("Idle")

@@ -14,10 +14,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var dash_speed = 500
 @export var dash_curve : Curve
 
-
 @export var attack_cooldown := 0.30   # temps entre deux attaques
 @export var attack_duration := 0.10  # durée pendant laquelle la hitbox est active
 @onready var attack_point = $AttackPoint
+#Value for knockback handling
+@export var knockback_strength: float = 300.0
+var knockback_velocity: Vector2 = Vector2.ZERO
+#Value for health handling
+@export var max_health = 5
+var current_health = max_health
+
+const TEAM_ENUM = preload("res://Scripts/attack_hit_box.gd")
 
 var able_to_jump = true
 var able_to_dash = true
@@ -105,7 +112,10 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Attack") and can_attack:
 		perform_attack()
 	
-	
+	if knockback_velocity != Vector2.ZERO:
+		# Apply knockback decay over time
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 2000 * delta)
+		velocity.x = knockback_velocity.x
 	
 	
 	
@@ -150,6 +160,7 @@ func perform_attack() -> void:
 	hitbox.set_collision_mask_value(2, true)
 	
 	hitbox.set_shape(RectangleShape2D.new(), Vector2(40, 10))
+	hitbox.set_properties(5, TEAM_ENUM.TEAM.PLAYER, RectangleShape2D.new(), Vector2(40, 10))
 	
 	# Supprime après la durée
 	await get_tree().create_timer(attack_duration).timeout
@@ -176,3 +187,18 @@ func get_attack_direction() -> Vector2:
 
 func _on_jump_buffer_timer_timeout() -> void:
 	pass # Replace with function body.
+
+func take_damage(damage: int) -> void:
+	print(current_health)
+	current_health -= damage
+	#flash_animation.play("flash")
+	if current_health <= 0:
+		pass
+		#die()
+
+func take_knockback(from_position : Vector2):
+	var direction = sign(global_position.x - from_position.x) # +1 if hit from left, -1 if hit from right
+	knockback_velocity.x = direction * knockback_strength
+	# optionally add some Y if you want a pop-up effect
+	knockback_velocity.y = -100
+	

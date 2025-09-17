@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dkswiui7o2hcj"]
 
 [ext_resource type="Shader" uid="uid://b82r6lw4iy75g" path="res://Shader/hit.gdshader" id="1_7fwit"]
-[ext_resource type="Script" uid="uid://l1nlewejgomk" path="res://Scripts/enemy_class.gd" id="1_xhgx3"]
+[ext_resource type="Script" path="res://Scripts/enemy_class.gd" id="1_xhgx3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fnywy"]
 shader = ExtResource("1_7fwit")

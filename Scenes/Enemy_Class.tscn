@@ -70,3 +70,4 @@ animation = &"Idle"
 libraries = {
 &"": SubResource("AnimationLibrary_amdjc")
 }
+speed_scale = 2.0

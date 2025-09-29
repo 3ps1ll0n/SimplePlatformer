@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clb4qkne1s0x2"
-path="res://.godot/imported/Bee_Attack.png-6ab3d2a90d9e3f27aee2c4cdada42127.ctex"
+uid="uid://cf8wc2q8gvs0s"
+path="res://.godot/imported/Frog_jump_w_stick_attack_front.png-afb7c12f5b0fcbcd032973899a9c0658.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Bee/Spritesheets/Bee_Attack.png"
-dest_files=["res://.godot/imported/Bee_Attack.png-6ab3d2a90d9e3f27aee2c4cdada42127.ctex"]
+source_file="res://Assets/Player/Frog_jump_w_stick_attack_front.png"
+dest_files=["res://.godot/imported/Frog_jump_w_stick_attack_front.png-afb7c12f5b0fcbcd032973899a9c0658.ctex"]
 
 [params]
 

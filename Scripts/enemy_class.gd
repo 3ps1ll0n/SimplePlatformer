@@ -14,6 +14,8 @@ func _ready() -> void:
 	add_to_group("enemies")
 
 func take_damage(damage: int) -> void:
+	if dead:
+		return
 	current_health -= damage
 	flash_animation.play("flash")
 	if current_health <= 0:

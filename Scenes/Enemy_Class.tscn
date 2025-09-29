@@ -38,6 +38,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_7fwit"]
 resource_name = "flash"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,3 +71,4 @@ animation = &"Idle"
 libraries = {
 &"": SubResource("AnimationLibrary_amdjc")
 }
+speed_scale = 2.0

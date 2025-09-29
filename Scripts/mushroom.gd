@@ -102,7 +102,7 @@ func attack():
 	add_child(hitbox)
 	hitbox.position = attack_point
 	
-	hitbox.set_properties(1, TEAM_ENUM.TEAM.ENEMY, RectangleShape2D.new() , Vector2(15, 15))
+	hitbox.set_properties(5, TEAM_ENUM.TEAM.ENEMY, RectangleShape2D.new() , Vector2(15, 15))
 	
 	# Supprime après la durée
 	await get_tree().create_timer(0.5).timeout

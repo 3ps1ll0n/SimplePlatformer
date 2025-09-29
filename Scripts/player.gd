@@ -22,7 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var knockback_strength: float = 250.0
 var knockback_velocity: Vector2 = Vector2.ZERO
 #Value for health handling
-@export var max_health = 5
+@export var max_health = 40
 var current_health = max_health
 
 const TEAM_ENUM = preload("res://Scripts/attack_hit_box.gd")
@@ -224,6 +224,12 @@ func trigger_invincibility():
 	
 func get_is_invincible():
 	return is_invincible
+
+func get_max_health():
+	return max_health
+	
+func get_current_health():
+	return current_health
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if animated_sprite.animation == "Attack" or animated_sprite.animation == "Attack_Up" or animated_sprite.animation == "Hitted":

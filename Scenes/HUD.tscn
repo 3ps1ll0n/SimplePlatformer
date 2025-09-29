@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3gdepq7udgsv"]
+
+[ext_resource type="Script" uid="uid://b1ax2mlf2llgn" path="res://Scripts/hud.gd" id="1_sd512"]
+[ext_resource type="Texture2D" uid="uid://nosrv0jkmlhj" path="res://Assets/HUD_Assets/LifeBarContainer_Single.png" id="2_psnte"]
+[ext_resource type="Texture2D" uid="uid://ibqw6i3846sh" path="res://Assets/HUD_Assets/HealthBarProgress.png" id="3_s3jbq"]
+
+[node name="HUD" type="CanvasLayer"]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("1_sd512")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_right = 98.0
+offset_bottom = 16.0
+value = 100.0
+allow_greater = true
+texture_under = ExtResource("2_psnte")
+texture_progress = ExtResource("3_s3jbq")
+texture_progress_offset = Vector2(2, 2)

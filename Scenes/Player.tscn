@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://5gktlldlorps"]
+[gd_scene load_steps=85 format=3 uid="uid://5gktlldlorps"]
 
 [ext_resource type="Script" uid="uid://b25uase10kqpt" path="res://Scripts/player.gd" id="1_52ee3"]
 [ext_resource type="Texture2D" uid="uid://ni08tmspx70d" path="res://Assets/Player/Frog_attack_stick.png" id="2_5ixxa"]
@@ -544,8 +544,9 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_arntx"]
-radius = 7.95
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_megsn"]
+radius = 8.0
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_52ee3"]
 resource_name = "Blink"
@@ -584,6 +585,9 @@ _data = {
 &"RESET": SubResource("Animation_bhhdu")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_megsn"]
+size = Vector2(0, 0)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_52ee3")
 dash_curve = SubResource("Curve_52ee3")
@@ -591,14 +595,12 @@ dash_curve = SubResource("Curve_52ee3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_1e7my")
-animation = &"Hitted"
+animation = &"Heavy_Down_Attack"
 autoplay = "Idle"
-frame = 2
-frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
-shape = SubResource("CircleShape2D_arntx")
+[node name="HitBox" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_megsn")
 
 [node name="AttackPoint" type="Node2D" parent="."]
 position = Vector2(12, 0)
@@ -608,6 +610,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_megsn")
 }
 speed_scale = 3.0
+
+[node name="CentralPoint" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CentralPoint"]
+shape = SubResource("RectangleShape2D_megsn")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]

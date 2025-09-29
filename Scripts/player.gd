@@ -43,6 +43,7 @@ var must_finish_anim = false
 # For camera
 func _ready():
 	add_to_group("player")
+	$CentralPoint.add_to_group("player")
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -125,9 +126,9 @@ func _physics_process(delta):
 	
 	#========================================== Animation Section ==========================================
 	if !must_finish_anim:
-		if input_direction > Vector2.ZERO:
+		if input_direction.x > 0:
 			animated_sprite.flip_h = false
-		elif input_direction < Vector2.ZERO:
+		elif input_direction.x < 0:
 			animated_sprite.flip_h = true
 		
 		if is_dashing == true:
@@ -231,6 +232,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func set_animation(animation_name : String) -> void:
 	if animation_name == "Attack_Up":
 		animated_sprite.offset = Vector2(0, -10)
+	elif animation_name == "Jump" or animation_name == "Fall":
+		animated_sprite.offset = Vector2(0, -16)
 	elif animation_name == "Double_Jump":
 		animated_sprite.offset = Vector2(0, -7)
 	elif animation_name == "Hitted":

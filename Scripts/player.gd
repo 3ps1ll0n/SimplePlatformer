@@ -22,6 +22,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var able_to_jump = true
 var able_to_dash = true
 var unlock_dash = false
+var unlock_grapple = false
 var is_dashing = false
 var is_jumping = false
 var can_attack := true
@@ -99,7 +100,7 @@ func _physics_process(delta):
 		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
 			
-	if Input.is_action_just_pressed("Grapple"):
+	if Input.is_action_just_pressed("Grapple") and unlock_grapple:
 		grappling_hook.fire(self, get_global_mouse_position())
 	elif Input.is_action_just_released("Grapple"):
 		grappling_hook.reset()
@@ -137,6 +138,8 @@ func _physics_process(delta):
 	
 func _unlock_dash():
 	unlock_dash = true
+func _unlock_grapple():
+	unlock_grapple = true
 func perform_attack() -> void:
 	can_attack = false
 	var dir := get_attack_direction()

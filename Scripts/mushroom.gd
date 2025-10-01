@@ -11,6 +11,8 @@ var attack_count = 0
 @onready var player: CharacterBody2D = %Player
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+const TEAM_ENUM = preload("res://Scripts/attack_hit_box.gd")
+
 enum AI_State{
 	IDLE,
 	HUNTING,
@@ -100,7 +102,7 @@ func attack():
 	add_child(hitbox)
 	hitbox.position = attack_point
 	
-	hitbox.set_shape(RectangleShape2D.new() , Vector2(15, 15))
+	hitbox.set_properties(1, TEAM_ENUM.TEAM.ENEMY, RectangleShape2D.new() , Vector2(15, 15))
 	
 	# Supprime après la durée
 	await get_tree().create_timer(0.5).timeout

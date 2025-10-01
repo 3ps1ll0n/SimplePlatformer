@@ -1,7 +1,9 @@
 extends CharacterBody2D
 #  List des variables
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var grappling_hook: Node2D = $"../GrapplingHook"
+
+@onready var grappling_hook: Node2D = $"../Grappling_Hook"
+@onready var animation: AnimationPlayer = $Animation
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
@@ -14,10 +16,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var dash_speed = 500
 @export var dash_curve : Curve
 
-
 @export var attack_cooldown := 0.30   # temps entre deux attaques
 @export var attack_duration := 0.10  # durée pendant laquelle la hitbox est active
 @onready var attack_point = $AttackPoint
+#Value for knockback handling
+@export var knockback_strength: float = 250.0
+var knockback_velocity: Vector2 = Vector2.ZERO
+#Value for health handling
+@export var max_health = 5
+var current_health = max_health
+
+const TEAM_ENUM = preload("res://Scripts/attack_hit_box.gd")
 
 var able_to_jump = true
 var able_to_dash = true
@@ -26,14 +35,18 @@ var unlock_grapple = false
 var is_dashing = false
 var is_jumping = false
 var can_attack := true
+var is_invincible := false
 var dash_start_position : Vector2
 var dash_direction : Vector2 = Vector2.ZERO
 var last_direction : Vector2 = Vector2.RIGHT
 var attack_direction := Vector2.RIGHT 
 
+var must_finish_anim = false
+
 # For camera
 func _ready():
 	add_to_group("player")
+	$CentralPoint.add_to_group("player")
 
 func _physics_process(delta):
 
@@ -108,30 +121,33 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Attack") and can_attack:
 		perform_attack()
 	
-	
+	if knockback_velocity != Vector2.ZERO:
+		# Apply knockback decay over time
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 2000 * delta)
+		velocity.x = knockback_velocity.x
 	
 	
 	
 	#========================================== Animation Section ==========================================
-	
-	if input_direction > Vector2.ZERO:
-		animated_sprite.flip_h = false
-	elif input_direction < Vector2.ZERO:
-		animated_sprite.flip_h = true
-	
-	if is_dashing == true:
-		animated_sprite.play("Double_Jump")
-	else:
-		if not is_on_floor():
-			if velocity.y < 0:
-				animated_sprite.play("Jump")
-			elif velocity.y > 0:
-				animated_sprite.play("Fall")
+	if !must_finish_anim:
+		if input_direction.x > 0:
+			animated_sprite.flip_h = false
+		elif input_direction.x < 0:
+			animated_sprite.flip_h = true
+		
+		if is_dashing == true:
+			set_animation("Double_Jump")
 		else:
-			if velocity.x != 0:
-				animated_sprite.play("Run")
+			if not is_on_floor():
+				if velocity.y < 0:
+					set_animation("Jump")
+				elif velocity.y > 0:
+					set_animation("Fall")
 			else:
-				animated_sprite.play("Idle")
+				if velocity.x != 0:
+					set_animation("Run")
+				else:
+					set_animation("Idle")
 	
 
 	move_and_slide()
@@ -142,7 +158,12 @@ func _unlock_grapple():
 	unlock_grapple = true
 func perform_attack() -> void:
 	can_attack = false
+	must_finish_anim = true
 	var dir := get_attack_direction()
+	if dir == Vector2.UP:
+		set_animation("Attack_Up")
+	else:
+		set_animation("Attack")
 	# Place le AttackPoint selon la direction
 	var offset = 32.0 # distance devant le joueur
 	attack_point.position = dir * offset
@@ -157,6 +178,7 @@ func perform_attack() -> void:
 	hitbox.set_collision_mask_value(2, true)
 	
 	hitbox.set_shape(RectangleShape2D.new(), Vector2(40, 10))
+	hitbox.set_properties(5, TEAM_ENUM.TEAM.PLAYER, RectangleShape2D.new(), Vector2(40, 10))
 	
 	# Supprime après la durée
 	await get_tree().create_timer(attack_duration).timeout
@@ -183,3 +205,53 @@ func get_attack_direction() -> Vector2:
 
 func _on_jump_buffer_timer_timeout() -> void:
 	pass # Replace with function body.
+
+func take_damage(damage: int) -> void:
+	if is_invincible:
+		return
+	current_health -= damage
+	animation.play("Blink")
+	set_animation("Hitted")
+	must_finish_anim = true
+	
+	if current_health <= 0:
+		pass
+		#die()
+
+func take_knockback(from_position : Vector2):
+	if is_invincible:
+		return
+		
+	var direction = sign(position.x - from_position.x) # +1 if hit from left, -1 if hit from right
+	knockback_velocity.x = direction * knockback_strength
+	# optionally add some Y if you want a pop-up effect
+	knockback_velocity.y = -100
+
+func trigger_invincibility():
+	is_invincible = true
+	
+func get_is_invincible():
+	return is_invincible
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if animated_sprite.animation == "Attack" or animated_sprite.animation == "Attack_Up" or animated_sprite.animation == "Hitted":
+		must_finish_anim = false
+		
+func set_animation(animation_name : String) -> void:
+	if animation_name == "Attack_Up":
+		animated_sprite.offset = Vector2(0, -10)
+	elif animation_name == "Jump" or animation_name == "Fall":
+		animated_sprite.offset = Vector2(0, -16)
+	elif animation_name == "Double_Jump":
+		animated_sprite.offset = Vector2(0, -7)
+	elif animation_name == "Hitted":
+		animated_sprite.offset = Vector2(0, -8)
+	else:
+		animated_sprite.offset = Vector2.ZERO
+	
+	animated_sprite.play(animation_name)
+	pass
+
+func _on_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Blink":
+		is_invincible = false;

@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://cfgwin3l382c3"]
+
+[ext_resource type="Script" uid="uid://lu4wtyepq3mx" path="res://Scripts/Platforming_Elements_Scripts/bubble.gd" id="1_gtpgr"]
+[ext_resource type="Texture2D" uid="uid://3ojduycn2wai" path="res://Assets/Platforming_Element_Assets/bubble_sheet.png" id="2_y315m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eesl"]
+atlas = ExtResource("2_y315m")
+region = Rect2(312, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y315m"]
+atlas = ExtResource("2_y315m")
+region = Rect2(336, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnrow"]
+atlas = ExtResource("2_y315m")
+region = Rect2(360, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ap085"]
+atlas = ExtResource("2_y315m")
+region = Rect2(384, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skaqr"]
+atlas = ExtResource("2_y315m")
+region = Rect2(408, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vam4"]
+atlas = ExtResource("2_y315m")
+region = Rect2(432, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tcrh"]
+atlas = ExtResource("2_y315m")
+region = Rect2(456, 0, 24, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_celjb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7eesl")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y315m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnrow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ap085")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skaqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vam4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tcrh")
+}],
+"loop": false,
+"name": &"Pop",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gtpgr"]
+radius = 12.0
+
+[node name="Bubble" type="Area2D"]
+z_index = 1
+script = ExtResource("1_gtpgr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_celjb")
+animation = &"Pop"
+autoplay = "Idle"
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gtpgr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

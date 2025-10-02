@@ -763,9 +763,7 @@ dash_curve = SubResource("Curve_52ee3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, -2)
 sprite_frames = SubResource("SpriteFrames_1e7my")
-
 animation = &"Idle"
-
 autoplay = "Idle"
 
 [node name="HitBox" type="CollisionShape2D" parent="."]

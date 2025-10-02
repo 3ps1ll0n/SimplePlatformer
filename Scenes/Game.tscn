@@ -1,5 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://byswk1uorrwvw"]
-
+[gd_scene load_steps=25 format=3 uid="uid://byswk1uorrwvw"]
 
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
@@ -14,12 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
 [ext_resource type="PackedScene" uid="uid://c8fl5j6fo7ywg" path="res://Scenes/Projectile_Manager.tscn" id="7_acvyw"]
 [ext_resource type="Texture2D" uid="uid://rmit5bhksyeb" path="res://Assets/Parallax/Garden's Forest/background1.png" id="7_fgofq"]
-
-[ext_resource type="PackedScene" uid="uid://ba66bpn7u7y4q" path="res://Scenes/Mushroom.tscn" id="13_3cx6b"]
-[ext_resource type="PackedScene" uid="uid://c6ndjdd6onb5b" path="res://Scenes/Bee.tscn" id="14_wxwew"]
-[ext_resource type="PackedScene" uid="uid://c4oqrpcv0yxn1" path="res://Scenes/unlockable_dash.tscn" id="15_acvyw"]
-[ext_resource type="PackedScene" uid="uid://cr6om11pahnc7" path="res://Scenes/unlockable_grapple.tscn" id="16_4q8tf"]
+[ext_resource type="PackedScene" uid="uid://k6jrg8gtwmxl" path="res://Scenes/Mushroom.tscn" id="13_3cx6b"]
+[ext_resource type="PackedScene" path="res://Scenes/unlockable_dash.tscn" id="15_acvyw"]
+[ext_resource type="PackedScene" path="res://Scenes/unlockable_grapple.tscn" id="16_4q8tf"]
 [ext_resource type="Script" uid="uid://c3yvrjsvu6pif" path="res://Scripts/unlockable_grapple.gd" id="17_x3xnh"]
+[ext_resource type="PackedScene" uid="uid://cfgwin3l382c3" path="res://Scenes/Platforming_Elements/Bubble.tscn" id="18_x3xnh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kldst"]
 texture = ExtResource("2_j5yw3")
@@ -487,3 +485,6 @@ position = Vector2(187, -7)
 [node name="UnlockableGrapple" parent="UnlockableAbility" instance=ExtResource("16_4q8tf")]
 position = Vector2(224, -7)
 script = ExtResource("17_x3xnh")
+
+[node name="Bubble" parent="." instance=ExtResource("18_x3xnh")]
+position = Vector2(23, -60)

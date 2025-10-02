@@ -135,7 +135,7 @@ func _physics_process(delta):
 	if knockback_velocity != Vector2.ZERO:
 		# Apply knockback decay over time
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, 2000 * delta)
-		velocity.x = knockback_velocity.x
+		velocity = knockback_velocity
 	
 	
 	
@@ -189,6 +189,7 @@ func perform_attack() -> void:
 	hitbox.set_collision_mask_value(2, true)
 	
 	hitbox.set_properties(5, TEAM_ENUM.TEAM.PLAYER, CapsuleShape2D.new(), Vector2(10, 30))
+	hitbox.add_to_group("player_attack")
 	
 	# Supprime après la durée
 	await get_tree().create_timer(attack_duration).timeout
@@ -237,6 +238,9 @@ func take_knockback(from_position : Vector2):
 	knockback_velocity.x = direction * knockback_strength
 	# optionally add some Y if you want a pop-up effect
 	knockback_velocity.y = -100
+	
+func push_player(force : Vector2):
+	knockback_velocity = force
 
 func trigger_invincibility():
 	is_invincible = true

@@ -240,7 +240,7 @@ func take_knockback(from_position : Vector2):
 	knockback_velocity.y = -100
 	
 func push_player(force : Vector2):
-	knockback_velocity = force
+	velocity = force
 
 func trigger_invincibility():
 	is_invincible = true

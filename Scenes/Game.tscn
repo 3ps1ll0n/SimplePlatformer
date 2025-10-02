@@ -488,3 +488,9 @@ script = ExtResource("17_x3xnh")
 
 [node name="Bubble" parent="." instance=ExtResource("18_x3xnh")]
 position = Vector2(23, -60)
+
+[node name="Bubble2" parent="." instance=ExtResource("18_x3xnh")]
+position = Vector2(73, -90)
+
+[node name="Bubble3" parent="." instance=ExtResource("18_x3xnh")]
+position = Vector2(124, -122)

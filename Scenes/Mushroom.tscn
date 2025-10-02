@@ -489,9 +489,10 @@ size = Vector2(21, 25)
 
 [node name="Mushroom" instance=ExtResource("1_8wpk6")]
 z_index = 4
-collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_smnd8")
+hunting_distance = 400
+attack_distance = 45
+speed = 100.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -32)
@@ -499,15 +500,8 @@ sprite_frames = SubResource("SpriteFrames_8wpk6")
 animation = &"Attack_Stunned"
 autoplay = "Idle"
 
-[node name="Area2D" type="Area2D" parent="." index="1"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2(-0.5, -12.5)
-shape = SubResource("RectangleShape2D_g05hd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(-0.5, -12.5)
 shape = SubResource("RectangleShape2D_g05hd")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

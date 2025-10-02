@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://dg5pxd8bfrt5m" path="res://Assets/Parallax/Garden's Forest/frontleaves.png" id="5_dahhg"]
 [ext_resource type="Texture2D" uid="uid://dd7w8tqpkwbk2" path="res://Assets/Parallax/Garden's Forest/pushes.png" id="6_3so38"]
 [ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
-[ext_resource type="PackedScene" uid="uid://c8fl5j6fo7ywg" path="res://Scenes/Projectile_Manager.tscn" id="7_acvyw"]
 [ext_resource type="Texture2D" uid="uid://rmit5bhksyeb" path="res://Assets/Parallax/Garden's Forest/background1.png" id="7_fgofq"]
 
 [ext_resource type="PackedScene" uid="uid://ba66bpn7u7y4q" path="res://Scenes/Mushroom.tscn" id="13_3cx6b"]
@@ -343,7 +342,7 @@ texture = ExtResource("3_j5yw3")
 3:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_b2bpf"]
-physics_layer_0/collision_layer = 7
+physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_kldst")
 sources/1 = SubResource("TileSetAtlasSource_b2bpf")
@@ -419,9 +418,6 @@ repeat_times = 6
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/Front2"]
 texture = ExtResource("6_3so38")
-
-[node name="ProjectileManager" parent="." instance=ExtResource("7_acvyw")]
-unique_name_in_owner = true
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 2)

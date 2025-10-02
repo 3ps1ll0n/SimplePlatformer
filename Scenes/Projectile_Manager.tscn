@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8fl5j6fo7ywg"]
-
-[ext_resource type="Script" uid="uid://cxcl2bh07rqyy" path="res://Scripts/projectile_manager.gd" id="1_dgnt0"]
-
-[node name="ProjectileManager" type="Node2D"]
-z_index = 4
-script = ExtResource("1_dgnt0")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://byswk1uorrwvw"]
+[gd_scene load_steps=23 format=3 uid="uid://byswk1uorrwvw"]
 
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
@@ -11,10 +11,18 @@
 [ext_resource type="Texture2D" uid="uid://dg5pxd8bfrt5m" path="res://Assets/Parallax/Garden's Forest/frontleaves.png" id="5_dahhg"]
 [ext_resource type="Texture2D" uid="uid://dd7w8tqpkwbk2" path="res://Assets/Parallax/Garden's Forest/pushes.png" id="6_3so38"]
 [ext_resource type="PackedScene" uid="uid://bebb3viiekblk" path="res://Scenes/Grappling_Hook.tscn" id="6_7lihs"]
-[ext_resource type="PackedScene" uid="uid://c8fl5j6fo7ywg" path="res://Scenes/Projectile_Manager.tscn" id="7_acvyw"]
 [ext_resource type="Texture2D" uid="uid://rmit5bhksyeb" path="res://Assets/Parallax/Garden's Forest/background1.png" id="7_fgofq"]
 [ext_resource type="PackedScene" uid="uid://k6jrg8gtwmxl" path="res://Scenes/Mushroom.tscn" id="13_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://d3gdepq7udgsv" path="res://Scenes/HUD.tscn" id="14_wxwew"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_71axn"]
+size = Vector2(20, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_71axn"]
+transparency = 2
+alpha_scissor_threshold = 1.0
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("7_fgofq")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kldst"]
 texture = ExtResource("2_j5yw3")
@@ -354,6 +362,20 @@ size = Vector2(463, 311)
 
 [node name="Game" type="Node2D"]
 
+[node name="Parallax3D" type="Node3D" parent="."]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="Parallax3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13.54)
+visible = false
+projection = 1
+size = 7.25
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Parallax3D"]
+visible = false
+mesh = SubResource("QuadMesh_71axn")
+surface_material_override/0 = SubResource("StandardMaterial3D_71axn")
+
 [node name="Parallax" type="Node" parent="."]
 
 [node name="Layer4" type="Parallax2D" parent="Parallax"]
@@ -415,9 +437,6 @@ repeat_times = 6
 [node name="Sprite2D" type="Sprite2D" parent="Parallax/Front2"]
 texture = ExtResource("6_3so38")
 
-[node name="ProjectileManager" parent="." instance=ExtResource("7_acvyw")]
-unique_name_in_owner = true
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(-1, 2)
 tile_set = SubResource("TileSet_b2bpf")
@@ -478,5 +497,10 @@ shape = SubResource("RectangleShape2D_fgofq")
 
 [node name="Mushroom" parent="." instance=ExtResource("13_3cx6b")]
 position = Vector2(118, 17)
+max_health = null
+knockback_strength = null
+hunting_distance = null
+attack_distance = null
+speed = null
 
 [node name="HUD" parent="." instance=ExtResource("14_wxwew")]

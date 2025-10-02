@@ -4,9 +4,9 @@ const JUMP_VELOCITY = -400.0
 var state : AI_State = AI_State.IDLE
 var attack_count = 0
 
-@export var hunting_distance := 400
-@export var attack_distance := 45
-@export var speed = 100.0
+var hunting_distance := 400
+var attack_distance := 45
+var speed = 100.0
 
 @onready var player: CharacterBody2D = %Player
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -80,9 +80,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("Idle")
 
 	move_and_slide()
-	
-	
-	
+
 func hunt():
 	if position.x > player.position.x:
 		direction = -1
@@ -102,7 +100,7 @@ func attack():
 	add_child(hitbox)
 	hitbox.position = attack_point
 	
-	hitbox.set_properties(1, TEAM_ENUM.TEAM.ENEMY, RectangleShape2D.new() , Vector2(15, 15))
+	hitbox.set_properties(5, TEAM_ENUM.TEAM.ENEMY, RectangleShape2D.new() , Vector2(15, 15))
 	
 	# Supprime après la durée
 	await get_tree().create_timer(0.5).timeout
@@ -115,3 +113,10 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	elif animated_sprite.animation == "Attack_Stunned":
 		state = AI_State.IDLE
 		attack_count = 0
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and not dead:
+		body.take_damage(5)
+		body.take_knockback(position)
+		body.trigger_invincibility()

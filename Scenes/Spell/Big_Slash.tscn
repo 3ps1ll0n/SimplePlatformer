@@ -1,0 +1,153 @@
+[gd_scene load_steps=18 format=3 uid="uid://dehby63f2l6q4"]
+
+[ext_resource type="Script" uid="uid://b7ral3sv8jw2g" path="res://Scripts/Spell_Scripts/big_slash.gd" id="1_oreo3"]
+[ext_resource type="PackedScene" uid="uid://dhcd4aic0puqy" path="res://Scenes/Attack_Hit_Box.tscn" id="2_jkoe0"]
+[ext_resource type="Texture2D" uid="uid://ccpllwkyrjra1" path="res://Assets/Spell_Assets/Slash_Spell/Vfx_attack_slash.png" id="3_3dpjs"]
+[ext_resource type="Texture2D" uid="uid://dj7462s6hoase" path="res://Assets/Spell_Assets/Slash_Spell/Vfx_attack_hit.png" id="4_18qif"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dbm88"]
+radius = 15.5
+height = 34.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18qif"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3c42"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edmvn"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jpy8c"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o01an"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2d2f"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpe1s"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4mg4"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ojg5"]
+atlas = ExtResource("3_3dpjs")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jkoe0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18qif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3c42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edmvn")
+}],
+"loop": false,
+"name": &"Create",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jpy8c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o01an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2d2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpe1s")
+}],
+"loop": false,
+"name": &"Disapear",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4mg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ojg5")
+}],
+"loop": true,
+"name": &"Travel",
+"speed": 10.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l3c42"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_18qif"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 0.98999995
+anim_speed_max = 0.98999995
+
+[node name="Big_Slash" type="Area2D"]
+z_index = 4
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_oreo3")
+
+[node name="ProjectilHitBox" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-1.5, 0.312502)
+scale = Vector2(0.905, 1)
+polygon = PackedVector2Array(-6.0773478, -16.8125, 6.629834, -14.812501, 13.259668, -9.812501, 14.917127, -2.8125017, 11.60221, 8.187497, 4.4198895, 13.187497, -1.1049724, 15.187497, 6.629834, 5.6874976, 8.839779, -2.8125017, 4.4198895, -10.812501)
+
+[node name="SlashHitBox" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-4, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_dbm88")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SlashAttackHB" parent="." instance=ExtResource("2_jkoe0")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="SlashProjectileHB" parent="." instance=ExtResource("2_jkoe0")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -5.5)
+sprite_frames = SubResource("SpriteFrames_jkoe0")
+animation = &"Create"
+frame = 2
+frame_progress = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_l3c42")
+emitting = false
+amount = 1
+texture = ExtResource("4_18qif")
+lifetime = 0.2
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_18qif")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="SlashProjectileHB" to="." method="_on_slash_projectile_hb_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

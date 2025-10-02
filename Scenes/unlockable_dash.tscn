@@ -1,0 +1,147 @@
+[gd_scene load_steps=22 format=3 uid="uid://c4oqrpcv0yxn1"]
+
+[ext_resource type="Texture2D" uid="uid://cqv537r0yjh4y" path="res://Assets/Items/Fruits/Apple.png" id="1_a34ta"]
+[ext_resource type="Script" uid="uid://bhmrgkk3hb5tm" path="res://Scripts/unlockable_dash.gd" id="1_lrxih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrxih"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8fvq"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_goiav"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lm78"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2627f"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htqny"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii04y"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m8y4"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucm1t"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jvoe"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqp3i"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72vmr"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jrm4"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta7gv"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db850"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3thqk"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rcobk"]
+atlas = ExtResource("1_a34ta")
+region = Rect2(512, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4emm8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrxih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8fvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_goiav")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lm78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2627f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htqny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii04y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m8y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucm1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0jvoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqp3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72vmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jrm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta7gv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db850")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3thqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rcobk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c0v7m"]
+
+[node name="UnlockableDash" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_lrxih")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4emm8")
+autoplay = "default"
+frame_progress = 0.886381
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c0v7m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

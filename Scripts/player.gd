@@ -1,6 +1,7 @@
 extends CharacterBody2D
 #  List des variables
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var grappling_hook: Node2D = $"../Grappling_Hook"
 @onready var fight_animation: AnimationPlayer = $FightAnimation
 @onready var spell_manager: Node2D = $Spell_Manager
@@ -32,6 +33,8 @@ const TEAM_ENUM = preload("res://Scripts/attack_hit_box.gd")
 
 var able_to_jump = true
 var able_to_dash = true
+var unlock_dash = false
+var unlock_grapple = false
 var is_dashing = false
 var is_jumping = false
 var can_attack := true
@@ -50,8 +53,10 @@ func _ready():
 	$CentralPoint.add_to_group("player")
 
 func _physics_process(delta):
+
 	if is_dead:
 		return
+
 	# Add the gravity.
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
 		able_to_jump = false
@@ -91,7 +96,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)
 	
 	# Dash activation
-	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash:
+	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash and unlock_dash:
 		is_dashing = true
 		able_to_dash = false
 		is_jumping = false
@@ -109,13 +114,13 @@ func _physics_process(delta):
 		able_to_jump = true
 	# Performe actual dash.
 	if is_dashing:
-
+		
 		var current_distance = position.distance_to(dash_start_position)
 		velocity = dash_direction * dash_speed * dash_curve.sample(current_distance)
 		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
 			
-	if Input.is_action_just_pressed("Grapple"):
+	if Input.is_action_just_pressed("Grapple") and unlock_grapple:
 		grappling_hook.fire(self, get_global_mouse_position())
 	elif Input.is_action_just_released("Grapple"):
 		grappling_hook.reset()
@@ -159,6 +164,10 @@ func _physics_process(delta):
 	if not movement_locked:
 		move_and_slide()
 	
+func _unlock_dash():
+	unlock_dash = true
+func _unlock_grapple():
+	unlock_grapple = true
 func perform_attack() -> void:
 	can_attack = false
 	play_locked = true

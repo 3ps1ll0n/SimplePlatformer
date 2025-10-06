@@ -30,6 +30,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if state == AI_State.DEAD:
+		#move_and_slide()
 		return
 	
 	# Add the gravity.

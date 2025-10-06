@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://byswk1uorrwvw"]
+[gd_scene load_steps=26 format=3 uid="uid://byswk1uorrwvw"]
 
+[ext_resource type="PackedScene" uid="uid://d3gdepq7udgsv" path="res://Scenes/HUD.tscn" id="1_8r6kd"]
 [ext_resource type="PackedScene" uid="uid://5gktlldlorps" path="res://Scenes/Player.tscn" id="1_gl6un"]
 [ext_resource type="PackedScene" uid="uid://carmuvqqet7mu" path="res://Scenes/room_by_room_camera.tscn" id="2_b2bpf"]
 [ext_resource type="Texture2D" uid="uid://cocfe272444wq" path="res://Assets/Terrain/Terrain (16x16).png" id="2_j5yw3"]
@@ -356,6 +357,8 @@ size = Vector2(992, 311)
 size = Vector2(463, 302.5)
 
 [node name="Game" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource("1_8r6kd")]
 
 [node name="Parallax" type="Node" parent="."]
 

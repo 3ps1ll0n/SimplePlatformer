@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var grappling_hook: Node2D = $"../Grappling_Hook"
 @onready var fight_animation: AnimationPlayer = $FightAnimation
 @onready var spell_manager: Node2D = $Spell_Manager
+@onready var cotyote_timer: Timer = $CotyoteTimer
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
@@ -61,6 +62,7 @@ func _physics_process(delta):
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
 		able_to_jump = false
 		velocity.y += gravity * delta
+		cotyote_timer.start()
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):

@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var grappling_hook: Node2D = $"../Grappling_Hook"
 @onready var fight_animation: AnimationPlayer = $FightAnimation
 @onready var spell_manager: Node2D = $Spell_Manager
-@onready var cotyote_timer: Timer = $CotyoteTimer
+@onready var cotyote_timer: Timer = $CoyoteTimer
 
 @export var speed = 200.0
 @export_range(0,1) var acceleration = 0.1
@@ -47,6 +47,7 @@ var attack_direction := Vector2.RIGHT
 
 var play_locked = false
 var movement_locked = false
+var was_on_floor = false
 
 # For camera
 func _ready():
@@ -57,18 +58,21 @@ func _physics_process(delta):
 
 	if is_dead:
 		return
+		
+	print(cotyote_timer.time_left)
 
 	# Add the gravity.
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
 		able_to_jump = false
 		velocity.y += gravity * delta
-		cotyote_timer.start()
+		if cotyote_timer.time_left == 0 && was_on_floor:
+			cotyote_timer.start()
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("Jump"):
 		$JumpBufferTimer.start()
 		
-	if able_to_jump and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
+	if (able_to_jump || cotyote_timer.time_left > 0 && !is_jumping) and not is_dashing and $"JumpBufferTimer".time_left > 0 and not grappling_hook.get_is_hooked():
 		velocity.y = move_toward(velocity.y, jump_velocity, speed * 100 )
 		is_dashing = false
 		is_jumping = true
@@ -114,6 +118,7 @@ func _physics_process(delta):
 	if not is_dashing and is_on_floor():
 		able_to_dash = true
 		able_to_jump = true
+		is_jumping = false
 	# Performe actual dash.
 	if is_dashing:
 		
@@ -162,9 +167,12 @@ func _physics_process(delta):
 				else:
 					set_animation("Idle")
 	
-
+	was_on_floor = is_on_floor()
+	
 	if not movement_locked:
 		move_and_slide()
+	
+	
 	
 func _unlock_dash():
 	unlock_dash = true

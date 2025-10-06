@@ -787,7 +787,6 @@ position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_megsn")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.2
 one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

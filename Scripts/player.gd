@@ -59,8 +59,6 @@ func _physics_process(delta):
 	if is_dead:
 		return
 		
-	print(cotyote_timer.time_left)
-
 	# Add the gravity.
 	if not is_on_floor() and not grappling_hook.get_is_hooked():
 		able_to_jump = false
@@ -102,7 +100,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, input_direction.x * speed, speed)
 	
 	# Dash activation
-	if Input.is_action_just_pressed("Dash") and not is_dashing and able_to_dash and unlock_dash:
+	if Input.is_action_just_pressed("Dash") and !movement_locked and unlock_dash and not is_dashing and able_to_dash:
 		is_dashing = true
 		able_to_dash = false
 		is_jumping = false
@@ -127,7 +125,7 @@ func _physics_process(delta):
 		if $"Dash Timer".time_left <= 0 :
 			is_dashing = false
 			
-	if Input.is_action_just_pressed("Grapple") and unlock_grapple:
+	if Input.is_action_just_pressed("Grapple") and !movement_locked and unlock_grapple:
 		grappling_hook.fire(self, get_global_mouse_position())
 	elif Input.is_action_just_released("Grapple"):
 		grappling_hook.reset()

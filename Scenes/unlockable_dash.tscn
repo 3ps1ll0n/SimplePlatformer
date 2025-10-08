@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4oqrpcv0yxn1"]
+[gd_scene load_steps=22 format=3 uid="uid://1x1uowoi6gop"]
 
 [ext_resource type="Texture2D" uid="uid://cqv537r0yjh4y" path="res://Assets/Items/Fruits/Apple.png" id="1_a34ta"]
-[ext_resource type="Script" uid="uid://bhmrgkk3hb5tm" path="res://Scripts/unlockable_dash.gd" id="1_lrxih"]
+[ext_resource type="Script" path="res://Scripts/unlockable_dash.gd" id="1_lrxih"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrxih"]
 atlas = ExtResource("1_a34ta")
@@ -133,7 +133,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_c0v7m"]
 
 [node name="UnlockableDash" type="Area2D"]
-collision_mask = 2
 script = ExtResource("1_lrxih")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

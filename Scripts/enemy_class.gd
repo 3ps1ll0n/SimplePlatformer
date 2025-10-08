@@ -29,8 +29,9 @@ func take_knockback(from_position : Vector2, kb_multiplier := 1.0):
 
 func die() -> void:
 	dead = true
-	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, false)
 	set_collision_layer_value(3, true)
+	set_collision_mask_value(2, false)
 	#queue_free()
 
 func _physics_process(delta: float) -> void:

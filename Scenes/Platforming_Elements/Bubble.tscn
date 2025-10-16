@@ -1,8 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://cfgwin3l382c3"]
+[gd_scene load_steps=23 format=3 uid="uid://cfgwin3l382c3"]
 
 [ext_resource type="Script" uid="uid://lu4wtyepq3mx" path="res://Scripts/Platforming_Elements_Scripts/bubble.gd" id="1_gtpgr"]
 [ext_resource type="Texture2D" uid="uid://weo82iahm3dn" path="res://Assets/Platforming_Element_Assets/Bubble/Bubble_idle.png" id="2_7eesl"]
-[ext_resource type="Texture2D" uid="uid://3ojduycn2wai" path="res://Assets/Platforming_Element_Assets/bubble_sheet.png" id="2_y315m"]
+[ext_resource type="Texture2D" uid="uid://76ght03eo12c" path="res://Assets/Platforming_Element_Assets/Bubble/Bubble_pop.png" id="4_nnrow"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpiwb"]
 atlas = ExtResource("2_7eesl")
@@ -36,29 +36,41 @@ region = Rect2(192, 0, 32, 32)
 atlas = ExtResource("2_7eesl")
 region = Rect2(224, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y315m"]
-atlas = ExtResource("2_y315m")
-region = Rect2(336, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwplp"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nnrow"]
-atlas = ExtResource("2_y315m")
-region = Rect2(360, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_22j51"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ap085"]
-atlas = ExtResource("2_y315m")
-region = Rect2(384, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkmxq"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_skaqr"]
-atlas = ExtResource("2_y315m")
-region = Rect2(408, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6eba"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6vam4"]
-atlas = ExtResource("2_y315m")
-region = Rect2(432, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u4w5"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(128, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7tcrh"]
-atlas = ExtResource("2_y315m")
-region = Rect2(456, 0, 24, 28)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nu7o"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmjxo"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e48t1"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqpao"]
+atlas = ExtResource("4_nnrow")
+region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_celjb"]
 animations = [{
@@ -93,26 +105,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y315m")
+"texture": SubResource("AtlasTexture_dwplp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nnrow")
+"texture": SubResource("AtlasTexture_22j51")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ap085")
+"texture": SubResource("AtlasTexture_bkmxq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_skaqr")
+"texture": SubResource("AtlasTexture_c6eba")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6vam4")
+"texture": SubResource("AtlasTexture_8u4w5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7tcrh")
+"texture": SubResource("AtlasTexture_3nu7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmjxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e48t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqpao")
 }],
 "loop": false,
 "name": &"Pop",
-"speed": 10.0
+"speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gtpgr"]
@@ -124,9 +145,10 @@ script = ExtResource("1_gtpgr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_celjb")
-animation = &"Idle"
+animation = &"Pop"
 autoplay = "Idle"
-frame_progress = 0.64749974
+frame = 8
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gtpgr")

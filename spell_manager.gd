@@ -26,5 +26,5 @@ func get_selected_spell() -> String:
 func cast_spell():
 	var spell = preload("res://Scenes/Spell/Big_Slash.tscn").instantiate()
 	spell.position = global_position + (player.get_node("AttackPoint").position * 1.75)
-	spell.set_direction(player.get_attack_direction().x)
+	spell.set_direction(player.get_node("AttackPoint").global_position.x - player.global_position.x)
 	projectile_manager.add_child(spell)

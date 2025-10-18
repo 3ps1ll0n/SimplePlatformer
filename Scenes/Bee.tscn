@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dkswiui7o2hcj" path="res://Scenes/Enemy_Class.tscn" id="1_o7wem"]
 [ext_resource type="Script" uid="uid://dgqqmqwq5xdqq" path="res://Scripts/bee.gd" id="2_p7668"]
-[ext_resource type="Texture2D" uid="uid://gis8qe1xijcj" path="res://Assets/Bee/Spritesheets/Bee_Idle.png" id="2_ug8hw"]
-[ext_resource type="Texture2D" uid="uid://clb4qkne1s0x2" path="res://Assets/Bee/Spritesheets/Bee_Attack.png" id="2_y5fbj"]
-[ext_resource type="Texture2D" uid="uid://bh22gdoi1hh8l" path="res://Assets/Bee/Spritesheets/Bee_Death.png" id="3_p7668"]
-[ext_resource type="Texture2D" uid="uid://ghdwm2ol30mk" path="res://Assets/Bee/Spritesheets/Bee_Walk.png" id="4_bxir8"]
+[ext_resource type="Texture2D" uid="uid://gis8qe1xijcj" path="res://Assets/Enemy/Bee/Spritesheets/Bee_Idle.png" id="2_ug8hw"]
+[ext_resource type="Texture2D" uid="uid://clb4qkne1s0x2" path="res://Assets/Enemy/Bee/Spritesheets/Bee_Attack.png" id="2_y5fbj"]
+[ext_resource type="Texture2D" uid="uid://bh22gdoi1hh8l" path="res://Assets/Enemy/Bee/Spritesheets/Bee_Death.png" id="3_p7668"]
+[ext_resource type="Texture2D" uid="uid://ghdwm2ol30mk" path="res://Assets/Enemy/Bee/Spritesheets/Bee_Walk.png" id="4_bxir8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjtr2"]
 atlas = ExtResource("2_y5fbj")

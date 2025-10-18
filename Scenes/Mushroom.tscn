@@ -1,12 +1,12 @@
 [gd_scene load_steps=74 format=3 uid="uid://k6jrg8gtwmxl"]
 
-[ext_resource type="Texture2D" uid="uid://05sxgqsoaneq" path="res://Assets/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Attack.png" id="1_1cv8f"]
+[ext_resource type="Texture2D" uid="uid://05sxgqsoaneq" path="res://Assets/Enemy/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Attack.png" id="1_1cv8f"]
 [ext_resource type="PackedScene" uid="uid://dkswiui7o2hcj" path="res://Scenes/Enemy_Class.tscn" id="1_8wpk6"]
 [ext_resource type="Script" uid="uid://chlq8xvh5un0p" path="res://Scripts/mushroom.gd" id="1_smnd8"]
-[ext_resource type="Texture2D" uid="uid://k8ars1hrqxml" path="res://Assets/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-AttackWithStun.png" id="3_g05hd"]
-[ext_resource type="Texture2D" uid="uid://2486t0dupa0f" path="res://Assets/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="3_oj4ps"]
-[ext_resource type="Texture2D" uid="uid://brtv6u2xls747" path="res://Assets/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Die.png" id="4_fddr4"]
-[ext_resource type="Texture2D" uid="uid://cugp6sswc7waf" path="res://Assets/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Run.png" id="4_g05hd"]
+[ext_resource type="Texture2D" uid="uid://k8ars1hrqxml" path="res://Assets/Enemy/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-AttackWithStun.png" id="3_g05hd"]
+[ext_resource type="Texture2D" uid="uid://2486t0dupa0f" path="res://Assets/Enemy/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Idle.png" id="3_oj4ps"]
+[ext_resource type="Texture2D" uid="uid://brtv6u2xls747" path="res://Assets/Enemy/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Die.png" id="4_fddr4"]
+[ext_resource type="Texture2D" uid="uid://cugp6sswc7waf" path="res://Assets/Enemy/Forest_Monsters_FREE/Mushroom/Mushroom with VFX/Mushroom-Run.png" id="4_g05hd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oj4ps"]
 atlas = ExtResource("1_1cv8f")

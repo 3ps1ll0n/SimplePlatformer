@@ -35,6 +35,7 @@ var able_to_jump = true
 var able_to_dash = true
 var unlock_dash = false
 var unlock_grapple = false
+var unlock_stick = false
 var is_dashing = false
 var is_jumping = false
 var can_attack := true
@@ -125,9 +126,9 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("Grapple"):
 		grappling_hook.reset()
 	
-	if Input.is_action_just_pressed("Attack") and can_attack:
+	if Input.is_action_just_pressed("Attack") and can_attack and unlock_stick:
 		perform_attack()
-	elif Input.is_action_just_pressed("Cast_Spell"):
+	elif Input.is_action_just_pressed("Cast_Spell") and unlock_stick:
 		var dir := get_attack_direction()
 		attack_point.position = dir * attack_point_offset
 		fight_animation.play("Slash_Spell")
@@ -168,6 +169,8 @@ func _unlock_dash():
 	unlock_dash = true
 func _unlock_grapple():
 	unlock_grapple = true
+func _unlock_stick():
+	unlock_stick = true
 func perform_attack() -> void:
 	can_attack = false
 	play_locked = true
